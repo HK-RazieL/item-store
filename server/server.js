@@ -19,7 +19,8 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true })
     console.log(error);
   });
 
-app.use("/register", users)
+app.use("/user/", users);
+app.use("/items/", items);
 
 app.listen(port, () => {
   console.log("Server is running");
