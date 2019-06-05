@@ -23,15 +23,14 @@ class RegisterComponent extends React.Component {
 
     if(this.state.password !== this.state.confirmPassword){
       console.log("Password and Confirmation Password are different!");
+    } else {
+      const newUser = {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password
+      }
+      this.props.createUser(newUser);
     }
-
-    const newUser = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password
-    }
-    this.props.createUser(newUser);
-    
   }
 
   render() {
@@ -48,11 +47,11 @@ class RegisterComponent extends React.Component {
           </FormGroup>
           <FormGroup>
             <Label for="registerPassword" hidden>Password</Label>
-            <Input type="password" name="password" id="registerPassword" onChange={this.onChange} placeholder="Password" />
+            <Input type="password" name="password" id="registerPassword" onChange={this.onChange} placeholder="Password" autoComplete="oof"/>
           </FormGroup>
           <FormGroup>
             <Label for="confirmPassword" hidden>Confirm Password</Label>
-            <Input type="password" name="confirmPassword" id="confirmPassword" onChange={this.onChange} placeholder="Confirm Password" />
+            <Input type="password" name="confirmPassword" id="confirmPassword" onChange={this.onChange} placeholder="Confirm Password" autoComplete="oof" />
           </FormGroup>
           <Button>Submit</Button>
         </Form>
