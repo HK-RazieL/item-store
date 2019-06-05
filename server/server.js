@@ -11,6 +11,7 @@ const users = require("./routes/users");
 const app = express();
 
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => {

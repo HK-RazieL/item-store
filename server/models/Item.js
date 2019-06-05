@@ -5,15 +5,9 @@ const ItemSchema = new Schema({
   name: { type: String, required: true, trim: true },
   image: { type: String, required: true },
   size: { type: String, required: true, trim: true },
-  category: { type: String, required: true, trim: true },
   description: { type: String, trim: true },
-  materials: { type: String, required: true },
-  quantity: { type: Number, required: true, min: 0, default: 0 },
-  insideLayer: { type: [String] },
-  outsideLayer: { type: [String] },
   price: { type: Number, required: true, default: 0.00, min: 0 },
   dateAdded: { type: Date, default: Date.now },
 });
 
 module.exports = Item = mongoose.model("item", ItemSchema);
-

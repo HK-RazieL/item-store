@@ -17,12 +17,7 @@ router.post("/create", passport.authenticate("jwt", { session: false }), (req, r
     name: req.body.name,
     image: req.body.image,
     size: req.body.size,
-    category: req.body.category,
     description: req.body.description,
-    materials: req.body.materials,
-    quantity: req.body.quantity,
-    insideLayer: req.body.insideLayer,
-    outsideLayer: req.body.outsideLayer,
     price: req.body.price,
   });
 

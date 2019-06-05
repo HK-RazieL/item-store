@@ -1,11 +1,26 @@
-import { ADD_ITEM, DELETE_ITEM } from "../actions/itemTypes";
+import { GET_ITEMS, CREATE_ITEM, DELETE_ITEM } from "../actions/itemTypes";
 
-export default function(state, action) {
+const initialState = {
+  items: []
+}
+
+export default function(state = initialState, action) {
   switch(action.type) {
-    case ADD_ITEM: 
-      return "";
+    case GET_ITEMS:
+      return {
+        ...state,
+        items: action.payload
+      };
+    case CREATE_ITEM: 
+      return {
+        ...state,
+        items: [action.payload, ...state.items]
+      };
     case DELETE_ITEM:
-      return "";
+      return {
+        ...state,
+        items: state.items.filter((item) => (item._id !== action.payload))
+      };
     default:
       return state;
   }

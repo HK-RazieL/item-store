@@ -8,14 +8,10 @@ const jwtSecret = require("../config/keys").secretOrKey;
 const User = require("../models/User");
 
 router.post("/register", (req, res) => {
-  let username = req.body.username;
-  let email = req.body.email;
-  let password = req.body.password;
-
-  bcrypt.hash(password, saltRounds).then((hash) => {
+  bcrypt.hash(req.body.password, saltRounds).then((hash) => {
     const newUser = new User({
-      username: username,
-      email: email,
+      username: req.body.username,
+      email: req.body.email,
       password: hash
     });
 
@@ -33,7 +29,7 @@ router.post("/login", (req, res) => {
   User.findOne({ username: loginUsername }).then((user) => {
     bcrypt.compare(loginPassword, user.password).then((passCheck) => {
       if(passCheck){
-        jwt.sign({ id: user.id, username: user.username }, 
+        jwt.sign({ id: user.id, username: user.username, auth: true }, 
           jwtSecret, 
           { expiresIn: "1h" }, 
           (error, token) => {
@@ -51,5 +47,11 @@ router.post("/login", (req, res) => {
     res.status(404).json("User not found.");
   });
 });
+
+router.get("/:id", (req, res) => {
+  User.findOne({ id: req.body.id }).then((user) => {
+    res.json(user);
+  })
+})
 
 module.exports = router;

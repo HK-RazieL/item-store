@@ -35,7 +35,7 @@ export default class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/items/inventory">Items</NavLink>
+                <NavLink href="/items/">Items</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
@@ -43,7 +43,7 @@ export default class NavBar extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    <NavLink href="/user/profile/:id">Info</NavLink>
+                    <NavLink href="/user/:id">Info</NavLink>
                   </DropdownItem>
                   <DropdownItem>
                     <NavLink href="/user/logout">Logout</NavLink>
