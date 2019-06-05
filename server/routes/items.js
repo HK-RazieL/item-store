@@ -4,7 +4,7 @@ const passport = require("passport");
 
 const Item = require("../models/Item");
 
-router.get("/", passport.authenticate("jwt", { session: false }),  (req, res) => {
+router.get("/",  (req, res) => {
   Item.find()
     .sort({ date: -1, category: 1 })
     .then((items) => {
