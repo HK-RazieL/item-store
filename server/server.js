@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const port = 3000;
 const mongoURI = require("./config/keys").mongoURI;
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 const items = require("./routes/items");
 const users = require("./routes/users");
@@ -19,9 +20,14 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true })
     console.log(error);
   });
 
+// Passport middleware
+app.use(passport.initialize());
+// Passport Config
+require("./config/passport")(passport);
+
 app.use("/user/", users);
 app.use("/items/", items);
 
 app.listen(port, () => {
-  console.log("Server is running");
+  console.log("Server is running on port", port);
 })

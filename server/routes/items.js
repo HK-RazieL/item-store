@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 const Item = require("../models/Item");
 
-router.get("/inventory", (req, res) => {
+router.get("/", passport.authenticate("jwt", { session: false }),  (req, res) => {
   Item.find()
     .sort({ date: -1, category: 1 })
     .then((items) => {
@@ -11,7 +12,7 @@ router.get("/inventory", (req, res) => {
     });
 });
 
-router.post("/create", (req, res) => {
+router.post("/create", passport.authenticate("jwt", { session: false }), (req, res) => {
   const newItem = new Item({
     name: req.body.name,
     image: req.body.image,
@@ -31,7 +32,7 @@ router.post("/create", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", passport.authenticate("jwt", { session: false }), (req, res) => {
   Item.findById(req.params.id)
     .then((item) => {
       item.remove()
